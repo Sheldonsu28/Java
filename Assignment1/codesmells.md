@@ -31,30 +31,34 @@ move up or down, and can just call that method in move().
 ### Explanation
 
     My solution get rid of the code smell by breaking the original move() method into several parts that can be extracted
-and merge to existing methods within the class.
+and merge to existing methods within the class. Therefore, the method is more readable and shorter.
 
 ============================================================
 
-## Code Smell 2: [Write the code smell name]
+## Code Smell 2: Alternative Classes with Different Interfaces
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Object-Orientation Abusers
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+* Class HungryFish
+* Class Fish
 
 ### Description:
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
+Most methods from both classes has same the same name and same functionality.
 
 ### Solution:
 
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+Implement Class HungryFish as a subclass of Class Fish, since most of the methods are the same.
+For the subclass HungryFish, the class initializer should override the initializer in class Fish.
+
 
 ### Explanation
 
-[How does your solution get rid of the code smell? Write your explanation here.]
+By implement the HungryFish class as a subclass of the Fish class, there will be much less duplicated code since most
+method in HungryFish are identical to the ones in Fish class such as move(), turnAround(), drawString and etc. This
+will make the resulting code less bulky and more readable.
 
 ============================================================
 
