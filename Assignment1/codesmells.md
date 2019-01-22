@@ -19,12 +19,12 @@ The contains too many lines that can be split up and integrate into other method
 
 ### Solution:
 
-    For lines 141 - 144 in method move(), the code can be integrate into the blowBubble() method (line 48) within the same
+  [  For lines 141 - 144 in method move(), the code can be integrate into the blowBubble() method (line 48) within the same
 class. And then just call the blowBubble() method.
     Lines 146 - 149 in method move() can be integrate into the turnAround() method (line87), and just call the method
 turnAround() instead of the original code.
     for lines 154 - 160 in method move() can be written as a separate method to determine whether the hungry fish will
-move up or down, and can just call that method in move().
+move up or down, and can just call that method in move().]
 
 
 
@@ -35,9 +35,9 @@ and merge to existing methods within the class. Therefore, the method is more re
 
 ============================================================
 
-## Code Smell 2: Alternative Classes with Different Interfaces
+## Code Smell 2: [Duplicate Code]
 
-### Code Smell Category: Object-Orientation Abusers
+### Code Smell Category: [Dispensables]
 
 ### List of classes and line numbers involved:
 
@@ -46,7 +46,7 @@ and merge to existing methods within the class. Therefore, the method is more re
 
 ### Description:
 
-Most methods from both classes has same the same name and same functionality.
+Most methods from both classes have same the same name and same functionality.
 
 ### Solution:
 
@@ -56,23 +56,25 @@ For the subclass HungryFish, the class initializer should override the initializ
 
 ### Explanation
 
-By implement the HungryFish class as a subclass of the Fish class, there will be much less duplicated code since most
+[By implement the HungryFish class as a subclass of the Fish class, there will be much less duplicated code since most
 method in HungryFish are identical to the ones in Fish class such as move(), turnAround(), drawString and etc. This
-will make the resulting code less bulky and more readable.
+will make the resulting code less bulky and more readable.]
 
 ============================================================
 
-## Code Smell 3: [Write the code smell name]
+## Code Smell 3: Switch Statements
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Object-Orientation Abusers
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+* [Class Fish, lines 63 - 80.]
+* [Class HungryFish, lines 62 - 81.]
 
 ### Description:
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
+[The turnAround() method in both of the classes have a long switch statement with multiple conditions, there are better ways
+to implement the turnaround method.]
 
 ### Solution:
 
@@ -81,7 +83,10 @@ how would you refactor the code?]
 
 ### Explanation
 
-[How does your solution get rid of the code smell? Write your explanation here.]
+[each class have a boolean variable called goingRight, we can use this variable to our advantage. We can hard code out the
+string representation of the fish for each condition (going left or right). That is, if the variable goingRight is true,
+we can just return the hard coded String representation of the fish going right, else return the string representation
+of the fish going left.]
 
 ============================================================
 
