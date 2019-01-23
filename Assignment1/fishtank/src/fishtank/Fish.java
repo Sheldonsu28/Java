@@ -132,10 +132,21 @@ public class Fish {
     public void move() {
 
         // Move one spot to the right or left.
+        int y_coordinate = FishTank.myLittleFishies.length - 1;
+        int x_coordinate = FishTank.myLittleFishies[0].length - 1;
+
         if (goingRight) {
-            c += 1;
-        } else {
-            c -= 1;
+            if (c == x_coordinate - 1) {
+                c += 0;
+            } else {
+                c += 1;
+            }
+        }else{
+            if (c == 1){
+                c-=0;
+            }else{
+                c -= 1;
+            }
         }
 
         // Figure out whether I blow a bubble.
@@ -149,9 +160,17 @@ public class Fish {
         // Figure out whether to move up or down, or neither.
 		d = Math.random();
         if (d < 0.1) {
-            r += 1;
+            if (y_coordinate - 1 == r){
+                r+= 0;
+            }else{
+                r+=1;
+            }
         } else if (d < 0.2) {
-            r -= 1;
+            if (r == 1){
+                r -= 0;
+            } else {
+                r -= 1;
+            }
         }
     }
 }
