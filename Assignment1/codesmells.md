@@ -35,9 +35,9 @@ and merge to existing methods within the class. Therefore, the method is more re
 
 ============================================================
 
-## Code Smell 2: [Duplicate Code]
+## Code Smell 2: Duplicate Code
 
-### Code Smell Category: [Dispensables]
+### Code Smell Category: Dispensables
 
 ### List of classes and line numbers involved:
 
@@ -68,25 +68,25 @@ will make the resulting code less bulky and more readable.]
 
 ### List of classes and line numbers involved:
 
-* [Class Fish, lines 63 - 80.]
-* [Class HungryFish, lines 62 - 81.]
+* Class Fish, lines 63 - 80.
+* Class HungryFish, lines 62 - 81.
 
 ### Description:
 
-[The turnAround() method in both of the classes have a long switch statement with multiple conditions, there are better ways
-to implement the turnaround method.]
+The turnAround() method in both of the classes have a long switch statement with multiple conditions, there are better ways
+to implement the turnaround method.
 
 ### Solution:
 
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+In your own words, explain how you might solve this code smell:
+how would you refactor the code?
 
 ### Explanation
 
-[each class have a boolean variable called goingRight, we can use this variable to our advantage. We can hard code out the
+Each class have a boolean variable called goingRight, we can use this variable to our advantage. We can hard code out the
 string representation of the fish for each condition (going left or right). That is, if the variable goingRight is true,
 we can just return the hard coded String representation of the fish going right, else return the string representation
-of the fish going left.]
+of the fish going left.
 
 ============================================================
 
@@ -119,25 +119,27 @@ all the other classes, we just need to change the coordinate class itself.
 
 ============================================================
 
-## Code Smell 5: [Write the code smell name]
+## Code Smell 5: Inappropriate Intimacy
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Couplers
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+* Class FishFrame, lines 18-44
 
 ### Description:
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
+This is a Inappropriate Intimacy because the method paint() access the internal parameter of class FishTank directly.
+The method assumes that the variable myLittleFishies exists, which violate the principle that classes should know as
+little as the other classes.
 
 ### Solution:
 
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+The solution is to move the method to the FishTank class and make the FishTank Class extend JFrame just like what class
+FishFrame is doing, basically marge FishFrame into Class FishTank.
 
 ### Explanation
 
-[How does your solution get rid of the code smell? Write your explanation here.]
-
+By moving the method to the FishTank class, the method don't have to access myLittleFishies from out side of the class,
+instead, the method became part of the FishTank, hence resolve the code smell.
 ============================================================
