@@ -130,12 +130,21 @@ public class HungryFish {
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void move() {
-
+        int y_coordinate = FishTank.myLittleFishies.length - 1;
+        int x_coordinate = FishTank.myLittleFishies[0].length - 1;
         // Move one spot to the right or left.
         if (goingRight) {
-            c += 1;
+            if (c == x_coordinate - 1){
+                c+=0;
+            }else{
+                c += 1;
+            }
         } else {
-            c -= 1;
+            if (c == 1){
+                c-=0;
+            }else{
+                c-=1;
+            }
         }
 
         // Figure out whether I blow a bubble.
@@ -153,10 +162,18 @@ public class HungryFish {
         // If it's elss tahn 10%, move up or down.
         if (d < 0.1) {
             // Increment
-            r += 1;
+            if (r == y_coordinate - 1){
+                r+=0;
+            }else{
+                r+=1;
+            }
         } else if (d < 0.2) {
             // Decrement
-            r -= 1;
+            if (r == 1){
+                r -= 0;
+            }else{
+                r -= 1;
+            }
         }
     }
 }
