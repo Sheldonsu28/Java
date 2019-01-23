@@ -172,7 +172,7 @@ public class HungryFish {
             }
         } else if (d < 0.2) {
             // Decrement
-            if (r == 5){
+            if (r <= 8){
                 r -= 0;
             }else{
                 r -= 1;
