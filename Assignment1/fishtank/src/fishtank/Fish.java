@@ -170,7 +170,7 @@ public class Fish {
                 r+=1;
             }
         } else if (d < 0.2) {
-            if (r == 5){
+            if (r <= 8){
                 r -= 0;
             } else {
                 r -= 1;
