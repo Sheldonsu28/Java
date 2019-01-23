@@ -90,26 +90,32 @@ of the fish going left.]
 
 ============================================================
 
-## Code Smell 4: [Write the code smell name]
+## Code Smell 4: Shotgun Surgery
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Change Preventers
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+* Class Fish, line line 132
+* Class HungryFish, line 132
+* Class Bubble, lines 82-133
+
 
 ### Description:
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
+The problem is that if i want to make the coordinate of the objects into a separate class of object, i have to modify
+any methods in those classes that relate to coordinate.
 
 ### Solution:
 
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+My solution is to make the coordinate in the classes as a separate class called coordinate. With in the class, i will
+implement four different method called moveUp(), moveDown(), moveLeft(), moveRight() and getCoordinate() with the
+functionality suggests by their name.
 
 ### Explanation
 
-[How does your solution get rid of the code smell? Write your explanation here.]
+By placing the coordinate into a separate object, if we ever change the we we store coordinate, we don't need to change
+all the other classes, we just need to change the coordinate class itself.
 
 ============================================================
 
