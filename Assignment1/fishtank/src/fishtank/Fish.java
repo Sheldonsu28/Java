@@ -47,12 +47,16 @@ public class Fish {
      * Causes this fish to blow a bubble.
      */
     protected void blowBubble() {
-		  Bubble b = new Bubble();
-		  b.setLocation(c, r);
-		  System.out.println(r + " " + c);
-
-			FishTank.myLittleFishies[r][c] = b;
+        Bubble b = new Bubble();
+        int k = r;
+        while (FishTank.myLittleFishies[k][c] != null){
+            k-=1;
+        }
+        b.setLocation(c, k);
+        System.out.println(k + " " + c);
+        FishTank.myLittleFishies[k][c] = b;
     }
+
 
 
 
@@ -142,7 +146,7 @@ public class Fish {
                 c += 1;
             }
         }else{
-            if (c == 1){
+            if (c == 0){
                 c-=0;
             }else{
                 c -= 1;
@@ -166,7 +170,7 @@ public class Fish {
                 r+=1;
             }
         } else if (d < 0.2) {
-            if (r == 1){
+            if (r == 5){
                 r -= 0;
             } else {
                 r -= 1;
