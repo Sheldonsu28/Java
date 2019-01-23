@@ -79,6 +79,9 @@ public class FishTank {
                           // Figure out whether to float left or right, if at all.
                           Bubble heybub= (Bubble) myLittleFishies[a][b];
                           heybub.d = Math.random();
+                          if (heybub.y <= 0){
+                              myLittleFishies[a][b] = null;
+                          }
                           if (heybub.d < 0.33) heybub.floatStraightUp();
                           else if (heybub.d < 0.66) heybub.floatRightUp();
                           else /* heybub.d >= 0.66 */ heybub.floatLeftUp();
