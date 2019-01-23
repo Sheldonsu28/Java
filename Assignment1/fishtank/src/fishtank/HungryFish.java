@@ -47,10 +47,13 @@ public class HungryFish {
      */
     protected void blowBubble() {
           Bubble b = new Bubble();
-          b.setLocation(c, r);
-          System.out.println(r + " " + c);
-
-            FishTank.myLittleFishies[r][c] = b;
+          int k = r;
+          while (FishTank.myLittleFishies[k][c] != null){
+              k-=1;
+          }
+         b.setLocation(c, k);
+         System.out.println(k + " " + c);
+         FishTank.myLittleFishies[k][c] = b;
     }
 
 
@@ -169,7 +172,7 @@ public class HungryFish {
             }
         } else if (d < 0.2) {
             // Decrement
-            if (r == 1){
+            if (r == 5){
                 r -= 0;
             }else{
                 r -= 1;
