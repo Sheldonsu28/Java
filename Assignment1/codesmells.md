@@ -135,11 +135,11 @@ little as the other classes.
 
 ### Solution:
 
-The solution is to move the method to the FishTank class and make the FishTank Class extend JFrame just like what class
-FishFrame is doing, basically marge FishFrame into Class FishTank.
+The solution is to move the two dimensional array to the FishFrame class, then the method paint() in the FishFrame class
+no longer needs to access the internal field of class FishTank.
 
 ### Explanation
 
-By moving the method to the FishTank class, the method don't have to access myLittleFishies from out side of the class,
-instead, the method became part of the FishTank, hence resolve the code smell.
+By moving the variable myLittleFish to the FishFrame class, method paint() no longer have to access myLittleFishies
+from out side of the class, hence solving the code smell.
 ============================================================
