@@ -98,7 +98,14 @@ public class FishTank {
                         entities[x][y].update();
                         entities[x][y] = null;
                         if(e.exists()) {
-                            entities[e.getX()][e.getY()] = e;
+                            //System.out.println(e.getClass().getName());
+                            try {
+                                entities[e.getX()][e.getY()] = e;
+                            }catch(ArrayIndexOutOfBoundsException a){
+                                System.out.println( e.getClass().getName());
+                                System.out.println("X:" + e.getX() + " Y:" + e.getY() );
+                                running = false;
+                            }
                         }
                     }
                 }
