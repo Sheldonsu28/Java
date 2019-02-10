@@ -144,15 +144,23 @@ public class HungryFish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            if (r < FishTank.getHeight()- 1 ) {
-                r += 1;
+            if (r < FishTank.getWidth() - 1) {
+                if(FishTank.getEntity(r+1,c) != null){
+                    this.turnAround();
+                }else{
+                    r += 1;
+                }
             }else {
                 r += 0;
             }
 
         } else {
             if (r > 0){
-                r -= 1;
+                if (FishTank.getEntity(r-1, c) != null){
+                    this.turnAround();
+                }else{
+                    r-=1;
+                }
             }else{
                 r -= 0;
             }
@@ -173,15 +181,23 @@ public class HungryFish extends FishTankEntity {
         // If it's less than 10%, move up or down.
         if (d < 0.1) {
             // Increment
-            if (c < FishTank.getWidth() - 1){
-                c += 1;
+            if (c < FishTank.getHeight() - 1){
+                if (FishTank.getEntity(r, c + 1) != null){
+                    c += 0;
+                }else{
+                    c += 1;
+                }
             }else{
                 c += 0;
             }
         } else if (d < 0.2) {
             // Decrement
             if (c > 0){
-                c -= 1;
+                if (FishTank.getEntity(r , c - 1) != null){
+                    c -= 0;
+                }else{
+                    c -= 1;
+                }
             }else{
                 c -= 0;
             }
