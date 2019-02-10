@@ -144,30 +144,47 @@ public class HungryFish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            c += 1;
+            if (c < FishTank.getWidth()) {
+                c += 1;
+            }else {
+                c += 0;
+            }
+
         } else {
-            c -= 1;
+            if (c > 0){
+                c -= 1;
+            }else{
+                c -= 0;
+            }
         }
 
         // Figure out whether I blow a bubble.
         double d = Math.random();
-        // If it's elss tahn 10%, blow a bubble.
+        // If it's less than 10%, blow a bubble.
         if (d < 0.1) { blowBubble(); }
 
         // Figure out whether I turn around.
         d = Math.random();
-        // If it's elss tahn 10%, turn around
+        // If it's less than 10%, turn around
         if (d < 0.1) { turnAround(); }
 
         // Figure out whether to move up or down, or neither.
         d = Math.random();
-        // If it's elss tahn 10%, move up or down.
+        // If it's less than 10%, move up or down.
         if (d < 0.1) {
             // Increment
-            r += 1;
+            if (r < FishTank.getHeight()){
+                r += 1;
+            }else{
+                r += 0;
+            }
         } else if (d < 0.2) {
             // Decrement
-            r -= 1;
+            if (r > 0){
+                r -= 1;
+            }else{
+                r -= 0;
+            }
         }
     }
 }
