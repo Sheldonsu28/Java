@@ -190,7 +190,7 @@ public class HungryFish extends FishTankEntity {
             }else{
                 c += 0;
             }
-        } else if (d < 0.2) {
+        } else if (d > 0.89) {
             // Decrement
             if (c > 0){
                 if (FishTank.getEntity(r , c - 1) != null){
