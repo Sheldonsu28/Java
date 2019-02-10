@@ -55,6 +55,10 @@ public class FishTank {
         return entities[x][y];
     }
 
+    public int getHeight(){return this.height;}
+
+    public int getWidth(){return this.width;}
+
     public static void main(String[] args) {
 
         // The window in which the fish swim.
