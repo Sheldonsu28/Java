@@ -2,6 +2,7 @@ package fishtank;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
 
 /**
  * A fish tank simulation.
@@ -48,7 +49,7 @@ public class FishTank {
 
     public static void addEntity(int x, int y, FishTankEntity e) {
         entities[x][y] = e;
-        e.setLocation(y, x);
+        e.setLocation(x, y);
     }
 
     public static FishTankEntity getEntity(int x, int y) {
