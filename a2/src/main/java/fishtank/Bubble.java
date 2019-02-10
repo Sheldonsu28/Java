@@ -90,7 +90,7 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-        x = x; // no change left or right
+        x += 0; // no change left or right
 
         // Figure out whether to grow, if at all.
         d = Math.random();
@@ -107,7 +107,11 @@ public class Bubble extends FishTankEntity {
     public void floatLeftUp() {
 
         // Move upwards.
-        y--;
+        if (y>0){
+            y--;
+        }else{
+            y-= 0;
+        }
         if (x > 0){
             x--;//left
         }else{
@@ -130,8 +134,12 @@ public class Bubble extends FishTankEntity {
     public void floatRightUp() {
 
         // Move upwards.
-        y--;
-        if (x < FishTank.getWidth()){
+        if (y > 0){
+            y--;
+        }else{
+            y-=0;
+        }
+        if (x < FishTank.getWidth() - 1){
             x++;// right
         }else{
             x += 0;
