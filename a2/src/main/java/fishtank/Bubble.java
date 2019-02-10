@@ -108,12 +108,20 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         if (y>0){
-            y--;
+            if (FishTank.getEntity(x, y - 1) != null){
+                y -= 0;
+            }else{
+                y-=1;
+            }
         }else{
             y-= 0;
         }
         if (x > 0){
-            x--;//left
+            if (FishTank.getEntity(x - 1, y) != null){
+                x -= 0;
+            }else{
+                x-=1;
+            }
         }else{
             x -= 0;
         }
@@ -135,12 +143,20 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         if (y > 0){
-            y--;
+            if (FishTank.getEntity(x, y - 1) != null){
+                y -= 0;
+            }else{
+                y-=1;
+            }
         }else{
             y-=0;
         }
         if (x < FishTank.getWidth() - 1){
-            x++;// right
+            if (FishTank.getEntity(x+1, y) != null){
+                x += 0;
+            }else{
+                x += 1;
+            }// right
         }else{
             x += 0;
         }
