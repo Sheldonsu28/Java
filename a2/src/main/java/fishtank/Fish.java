@@ -144,16 +144,16 @@ public class Fish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            if (c < FishTank.getWidth()) {
-                c += 1;
+            if (r < FishTank.getHeight() - 1) {
+                r += 1;
             }else {
-                c += 0;
+                r += 0;
             }
         } else {
-            if (c > 0){
-                c -= 1;
+            if (r > 0){
+                r -= 1;
             }else{
-                c -= 0;
+                r -= 0;
             }
         }
 
@@ -168,16 +168,16 @@ public class Fish extends FishTankEntity {
         // Figure out whether to move up or down, or neither.
 		d = Math.random();
         if (d < 0.1) {
-            if (r < FishTank.getHeight()){
-                r += 1;
+            if (c < FishTank.getWidth() - 1){
+                c += 1;
             }else{
-                r += 0;
+                c += 0;
             }
         } else if (d < 0.2) {
-            if (r > 0){
-                r -= 1;
+            if (c > 0){
+                c -= 1;
             }else{
-                r -= 0;
+                c -= 0;
             }
         }
     }
