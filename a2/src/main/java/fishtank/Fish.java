@@ -55,10 +55,10 @@ public class Fish extends FishTankEntity {
      */
     protected void blowBubble() {
 		  Bubble b = new Bubble();
-		  b.setLocation(c, r);
+		  b.setLocation(r, c);
 		  System.out.println(r + " " + c);
 
-		  FishTank.addEntity(c, r, b);
+		  FishTank.addEntity(r, c, b);
     }
 
 
@@ -144,14 +144,22 @@ public class Fish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            if (r < FishTank.getHeight() - 1) {
-                r += 1;
+            if (r < FishTank.getWidth() - 1) {
+                if(FishTank.getEntity(r+1,c) != null){
+                    this.turnAround();
+                }else{
+                    r += 1;
+                }
             }else {
                 r += 0;
             }
         } else {
             if (r > 0){
-                r -= 1;
+                if (FishTank.getEntity(r-1, c) != null){
+                    this.turnAround();
+                }else{
+                    r-=1;
+                }
             }else{
                 r -= 0;
             }
@@ -168,14 +176,22 @@ public class Fish extends FishTankEntity {
         // Figure out whether to move up or down, or neither.
 		d = Math.random();
         if (d < 0.1) {
-            if (c < FishTank.getWidth() - 1){
-                c += 1;
+            if (c < FishTank.getHeight() - 1){
+                if (FishTank.getEntity(r, c + 1) != null){
+                    c += 0;
+                }else{
+                    c += 1;
+                }
             }else{
                 c += 0;
             }
-        } else if (d < 0.2) {
+        } else if (d < 0.1) {
             if (c > 0){
-                c -= 1;
+                if (FishTank.getEntity(r , c - 1) != null){
+                    c -= 0;
+                }else{
+                    c -= 1;
+                }
             }else{
                 c -= 0;
             }
