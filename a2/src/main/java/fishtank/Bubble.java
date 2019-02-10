@@ -108,7 +108,11 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-         x -= 1; //left
+        if (x > 0){
+            x--;//left
+        }else{
+            x -= 0;
+        }
 
         // Figure out whether to grow, if at all.
           d = Math.random();
@@ -127,10 +131,14 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-x += 1;// right
+        if (x < FishTank.getWidth()){
+            x++;// right
+        }else{
+            x += 0;
+        }
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+          // Occasionally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals("."))appearance="o";
@@ -140,13 +148,17 @@ x += 1;// right
     }
 
     public void update() {
-        d = Math.random();
-        if (d < 0.33) {
-            floatStraightUp();
-        } else if (d < 0.66) {
-            floatRightUp();
-        } else /* heybub.d >= 0.66 */ {
-            floatLeftUp();
+        if (y == 0){
+            delete();
+        }else{
+            d = Math.random();
+            if (d < 0.33) {
+                floatStraightUp();
+            } else if (d < 0.66) {
+                floatRightUp();
+            } else /* heybub.d >= 0.66 */ {
+                floatLeftUp();
+            }
         }
     }
 }
