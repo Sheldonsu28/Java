@@ -91,6 +91,7 @@ public class FishTank {
         // Every .3 seconds, tell each item in the fishtank to take
         // a turn.
         while (running) {
+            FishTankEntity[][] newTank = new FishTankEntity[width][height];
 
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
@@ -101,7 +102,7 @@ public class FishTank {
                         if(e.exists()) {
                             //System.out.println(e.getClass().getName());
                             try {
-                                entities[e.getX()][e.getY()] = e;
+                                newTank[e.getX()][e.getY()] = e;
                             }catch(ArrayIndexOutOfBoundsException a){
                                 System.out.println( e.getClass().getName());
                                 System.out.println("X:" + e.getX() + " Y:" + e.getY() );
@@ -111,6 +112,8 @@ public class FishTank {
                     }
                 }
             }
+            entities = newTank;
+
 
             // Tell the fishtank to redraw itself.
             f.repaint();
