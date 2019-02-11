@@ -82,7 +82,7 @@ public class FishTank {
         addEntity(16, 35, new Fish());
         addEntity(6, 22, new Fish());
         addEntity(10, 20, new HungryFish());
-        //addEntity(10, 20, new FollowingFish((Fish) getEntity(23, 18)));
+        addEntity(10, 20, new FollowingFish((Fish) getEntity(23, 18)));
         addEntity(24, 33, new Seaweed(6));
         addEntity(32, 25, new Seaweed(7));
         addEntity(13, 25, new Seaweed(5));
@@ -105,8 +105,7 @@ public class FishTank {
                             entities[x][y].processed = true;
                             entities[x][y] = null;
                             if (e.exists()) {
-                                //System.out.println(e.getClass().getName());
-                                try {
+                                try {                                      //remember to change this line.
                                     entities[e.getX()][e.getY()] = e;
                                 } catch (ArrayIndexOutOfBoundsException a) {
                                     System.out.println(e.getClass().getName());
