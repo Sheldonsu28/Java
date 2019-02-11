@@ -17,19 +17,19 @@ public class Seaweed extends FishTankEntity {
 
     /** My colour. Ah,the vagaries of British vs. US spelling. */
     Color colour;
+    private int oriLength;
+    private int counter;
 
 
     /**
      * Constructs a new seaweed item at the specified cursor
      * location (x,y),l segments tall.
-     *
-     * @param  x  the x coordinate of the bubble's cursor location.
-     * @param  y  the y coordinate of the bubble's cursor location.
      * @param  l  the number of segments this seaweed is tall.
      */
     public Seaweed(int l) {
         this.l  =l;
         colour  =Color.green.darker().darker();
+        this.oriLength = l;
     }
 
     public int getLenght() {
@@ -106,11 +106,31 @@ public class Seaweed extends FishTankEntity {
     return my_curr_col;
   }
 
-  /**
+    /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
         leanRight  =!leanRight;
+    }
+
+    public void eatCheck(){
+      for ( int i = 0; i <= this.oriLength; i++ ) {
+        if (FishTank.getEntity(this.getX(), this.getY() - i) instanceof Fish || FishTank.getEntity(this.getX(), this.getY() - i) instanceof HungryFish) {
+          this.l = this.oriLength - (this.oriLength - i);
+          System.out.println("found 1 intersection");
+          break;
+        }
+      }
+      if (this.l < this.oriLength){
+        if (this.counter == 200){
+          this.l += 1;
+          this.counter = 0;
+          System.out.println("Counter reset");
+        }else{
+          this.counter += 1;
+          System.out.println(this.counter);
+        }
+      }
     }
 
 
