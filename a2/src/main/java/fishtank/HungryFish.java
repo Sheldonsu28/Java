@@ -13,9 +13,9 @@ public class HungryFish extends FishTankEntity {
     boolean goingRight;
 
     /** This fish's first coordinate. */
-    int r;
+    int x;
     /** This fish's second coordinate. */
-    int c;
+    int y;
     /** The colour of this fish. */
     private Color colour;
 
@@ -36,16 +36,16 @@ public class HungryFish extends FishTankEntity {
      * @param b  the second coordinate.
      */
     public void setLocation(int a, int b) {
-      r = a;
-      c = b;
+      x = a;
+      y = b;
     }
 
     int getX() {
-        return r;
+        return x;
     }
 
     int getY() {
-        return c;
+        return y;
     }
 
 
@@ -54,10 +54,10 @@ public class HungryFish extends FishTankEntity {
      */
     protected void blowBubble() {
           Bubble b = new Bubble();
-          b.setLocation(c, r);
-          System.out.println(r + " " + c);
+          b.setLocation(x, y);
+          System.out.println(x + " " + y);
 
-            FishTank.addEntity(c, r, b);
+            FishTank.addEntity(x, y, b);
     }
 
 
@@ -121,7 +121,7 @@ public class HungryFish extends FishTankEntity {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y*fm.charWidth('W'), x*fm.getAscent());
+        g.drawString(s, x*fm.charWidth('W'), y*fm.getAscent());
     }
 
 
@@ -132,7 +132,7 @@ public class HungryFish extends FishTankEntity {
      * @param  g  the graphics context in which to draw this item.
      */
     void draw(Graphics g) {
-        drawString(g, appearance, r, c);
+        drawString(g, appearance, x, y);
     }
 
 
@@ -144,25 +144,25 @@ public class HungryFish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            if (r < FishTank.getWidth() - 1) {
-                if(FishTank.getEntity(r+1,c) != null){
+            if (x < FishTank.getWidth() - 1) {
+                if(FishTank.getEntity(x + 1,y) != null){
                     this.turnAround();
                 }else{
-                    r += 1;
+                    x += 1;
                 }
             }else {
-                r += 0;
+                x += 0;
             }
 
         } else {
-            if (r > 0){
-                if (FishTank.getEntity(r-1, c) != null){
+            if (x > 0){
+                if (FishTank.getEntity(x-1, y) != null){
                     this.turnAround();
                 }else{
-                    r-=1;
+                    x-=1;
                 }
             }else{
-                r -= 0;
+                x -= 0;
             }
         }
 
@@ -181,25 +181,25 @@ public class HungryFish extends FishTankEntity {
         // If it's less than 10%, move up or down.
         if (d < 0.1) {
             // Increment
-            if (c < FishTank.getHeight() - 1){
-                if (FishTank.getEntity(r, c + 1) != null){
-                    c += 0;
+            if (y < FishTank.getHeight() - 1){
+                if (FishTank.getEntity(x, y + 1) != null){
+                    y += 0;
                 }else{
-                    c += 1;
+                    y += 1;
                 }
             }else{
-                c += 0;
+                y += 0;
             }
         } else if (d > 0.89) {
             // Decrement
-            if (c > 0){
-                if (FishTank.getEntity(r , c - 1) != null){
-                    c -= 0;
+            if (y > 0){
+                if (FishTank.getEntity(x , y - 1) != null){
+                    y -= 0;
                 }else{
-                    c -= 1;
+                    y -= 1;
                 }
             }else{
-                c -= 0;
+                y -= 0;
             }
         }
     }
