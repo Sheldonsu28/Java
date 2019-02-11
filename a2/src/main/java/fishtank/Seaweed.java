@@ -125,10 +125,8 @@ public class Seaweed extends FishTankEntity {
         if (this.counter == 200){
           this.l += 1;
           this.counter = 0;
-          System.out.println("Counter reset");
         }else{
           this.counter += 1;
-          System.out.println(this.counter);
         }
       }
     }
