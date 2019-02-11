@@ -95,7 +95,6 @@ public class FishTank {
         // Every .3 seconds, tell each item in the fishTank to take
         // a turn.
         while (running) {
-            int countable = 0;
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     FishTankEntity e = entities[x][y];
@@ -133,9 +132,6 @@ public class FishTank {
                     FishTankEntity e = entities[x][y];
                     if (e != null) {
                         e.processed = false;
-                        if (e instanceof Fish || e instanceof HungryFish || e instanceof Seaweed) {
-                            countable++;
-                        }
                     }
                 }
             }
@@ -150,7 +146,6 @@ public class FishTank {
             } catch (InterruptedException e) {
                 //not a big deal
             }
-            System.out.println("=============="+countable+"======================");
         }
 
     }
