@@ -68,7 +68,7 @@ public class Bubble extends FishTankEntity {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y*fm.charWidth('W'), x*fm.getAscent());
+        g.drawString(s, x*fm.charWidth('W'), y*fm.getAscent());
     }
 
 
@@ -89,7 +89,13 @@ public class Bubble extends FishTankEntity {
     public void floatStraightUp() {
 
         // Move upwards.
-        y--;
+        if (y > 0) {
+            if (FishTank.getEntity(x, y - 1) != null) {
+                y -= 0;
+            } else {
+                y -= 1;
+            }
+        }
         x += 0; // no change left or right
 
         // Figure out whether to grow, if at all.
@@ -173,7 +179,7 @@ public class Bubble extends FishTankEntity {
 
     public void update() {
         if (y == 0){
-            delete();
+            this.delete();
         }else{
             d = Math.random();
             if (d < 0.33) {
