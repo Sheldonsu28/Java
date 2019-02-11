@@ -13,9 +13,9 @@ public class Fish extends FishTankEntity {
     boolean goingRight;
 
     /** This fish's first coordinate. */
-    int r;
+    int x;
     /** This fish's second coordinate. */
-    private int c;
+    private int y;
     /** The colour of this fish. */
     Color colour;
 
@@ -37,16 +37,16 @@ public class Fish extends FishTankEntity {
      * @param b  the second coordinate.
      */
     public void setLocation(int a, int b) {
-      r = a;
-      c = b;
+      x = a;
+      y = b;
     }
 
     int getX() {
-        return r;
+        return x;
     }
 
     int getY() {
-        return c;
+        return y;
     }
 
 
@@ -55,10 +55,10 @@ public class Fish extends FishTankEntity {
      */
     protected void blowBubble() {
 		  Bubble b = new Bubble();
-		  b.setLocation(r, c);
-		  System.out.println(r + " " + c);
+		  b.setLocation(x, y);
+		  System.out.println(x + " " + y);
 
-		  FishTank.addEntity(r, c, b);
+		  FishTank.addEntity(x, y, b);
     }
 
 
@@ -92,13 +92,10 @@ public class Fish extends FishTankEntity {
      * Turns this fish around, causing it to reverse direction.
      */
     protected void turnAround() {
-        goingRight = !goingRight;
-        if (goingRight) {
-            appearance = reverseAppearance();
-        } else {
-            appearance = reverseAppearance();
-        }
+        this.goingRight = !this.goingRight;
+        appearance = reverseAppearance();
     }
+
 
     public void setGoingRight(boolean goingRight) {
         this.goingRight = goingRight;
@@ -121,7 +118,7 @@ public class Fish extends FishTankEntity {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y*fm.charWidth('W'), x*fm.getAscent());
+        g.drawString(s, x*fm.charWidth('W'), y*fm.getAscent());
     }
 
 
@@ -132,7 +129,7 @@ public class Fish extends FishTankEntity {
      * @param  g  the graphics context in which to draw this item.
      */
     public void draw(Graphics g) {
-        drawString(g, appearance, r, c);
+        drawString(g, appearance, x, y);
     }
 
 
@@ -144,24 +141,27 @@ public class Fish extends FishTankEntity {
 
         // Move one spot to the right or left.
         if (goingRight) {
-            if (r < FishTank.getWidth() - 1) {
-                if(FishTank.getEntity(r+1,c) != null){
+            if (x < FishTank.getWidth() - 1) {
+                if(FishTank.getEntity(x + 1,y) != null){
                     this.turnAround();
+                    x += 0;
                 }else{
-                    r += 1;
+                    x += 1;
                 }
             }else {
-                r += 0;
+                x += 0;
             }
         } else {
-            if (r > 0){
-                if (FishTank.getEntity(r-1, c) != null){
+            if (x > 0){
+                if (FishTank.getEntity(x-1, y) != null){
                     this.turnAround();
+                    x -= 0;
+
                 }else{
-                    r-=1;
+                    x-=1;
                 }
             }else{
-                r -= 0;
+                x -= 0;
             }
         }
 
@@ -174,27 +174,29 @@ public class Fish extends FishTankEntity {
         if (d < 0.1) { turnAround(); }
 
         // Figure out whether to move up or down, or neither.
+
 		d = Math.random();
         if (d > 0.05) {
-            if (c < FishTank.getHeight() - 1){
-                if (FishTank.getEntity(r, c + 1) != null){
-                    c += 0;
+            if (y < FishTank.getHeight() - 1){
+                if (FishTank.getEntity(x, y + 1) != null){
+                    y += 0;
                 }else{
-                    c += 1;
+                    y += 1;
                 }
             }else{
-                c += 0;
+                y += 0;
             }
         } else if (d >= 0.05 && d < 0.1) {
-            if (c > 0){
-                if (FishTank.getEntity(r , c - 1) != null){
-                    c -= 0;
+            if (y > 1){
+                if (FishTank.getEntity(x , y - 1) != null){
+                    y -= 0;
                 }else{
-                    c -= 1;
+                    y -= 1;
                 }
             }else{
-                c -= 0;
+                y -= 0;
             }
         }
+
     }
 }
