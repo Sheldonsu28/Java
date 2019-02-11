@@ -10,7 +10,7 @@ package fishtank;
  * Object in FishTank.java and see if you can understand why it doesn't work.)
  */
 public abstract class FishTankEntity {
-
+    public boolean processed = false;
     private boolean exists = true;
 
     abstract void update();
