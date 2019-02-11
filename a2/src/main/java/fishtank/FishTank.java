@@ -31,34 +31,38 @@ public class FishTank {
     /**
      * The width (in entities) of the whole tank
      */
-    private static final int width = frameWidth/charWidth;
+    private static final int width = frameWidth / charWidth;
 
     /**
      * The height (in entities) of the whole tank
      */
-    private static final int height = frameHeight/charHeight;
+    private static final int height = frameHeight / charHeight;
 
 
     /**
      * (int)(640/6) columns, (int)(480/10) rows.
      */
     private static FishTankEntity[][] entities =
-        new FishTankEntity[width][height];
+            new FishTankEntity[width][height];
 
     private static boolean running = true;
 
     public static void addEntity(int x, int y, FishTankEntity e) {
         entities[x][y] = e;
-        e.setLocation(x, y);
+        e.setLocation(x , y);
     }
 
     public static FishTankEntity getEntity(int x, int y) {
         return entities[x][y];
     }
 
-    public static int getHeight(){return height;}
+    public static int getHeight() {
+        return height;
+    }
 
-    public static int getWidth(){return width;}
+    public static int getWidth() {
+        return width;
+    }
 
     public static void main(String[] args) {
 
@@ -78,7 +82,7 @@ public class FishTank {
         addEntity(16, 35, new Fish());
         addEntity(6, 22, new Fish());
         addEntity(10, 20, new HungryFish());
-        addEntity(10, 20, new FollowingFish((Fish)getEntity(23, 18)));
+        //addEntity(10, 20, new FollowingFish((Fish) getEntity(23, 18)));
         addEntity(24, 33, new Seaweed(6));
         addEntity(32, 25, new Seaweed(7));
         addEntity(13, 25, new Seaweed(5));
@@ -91,33 +95,47 @@ public class FishTank {
         // Every .3 seconds, tell each item in the fishTank to take
         // a turn.
         while (running) {
-            FishTankEntity[][] newTank = new FishTankEntity[width][height];
-
+            int countable = 0;
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     FishTankEntity e = entities[x][y];
                     if (e != null) {
-                        entities[x][y].update();
-                        entities[x][y] = null;
-                        if(e.exists()) {
-                            //System.out.println(e.getClass().getName());
-                            try {
-                                newTank[e.getX()][e.getY()] = e;
-                            }catch(ArrayIndexOutOfBoundsException a){
-                                System.out.println( e.getClass().getName());
-                                System.out.println("X:" + e.getX() + " Y:" + e.getY() );
-                                running = false;
+
+                        if (!e.processed) {
+                            entities[x][y].update();
+                            entities[x][y].processed = true;
+                            entities[x][y] = null;
+                            if (e.exists()) {
+                                //System.out.println(e.getClass().getName());
+                                try {
+                                    entities[e.getX()][e.getY()] = e;
+                                } catch (ArrayIndexOutOfBoundsException a) {
+                                    System.out.println(e.getClass().getName());
+                                    System.out.println("X:" + e.getX() + " Y:" + e.getY());
+                                    running = false;
+                                }
                             }
                         }
                     }
                 }
             }
-            entities = newTank;
+
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     FishTankEntity item = entities[x][y];
                     if (item instanceof Seaweed) {
                         ((Seaweed) item).eatCheck();
+                    }
+                }
+            }
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    FishTankEntity e = entities[x][y];
+                    if (e != null) {
+                        e.processed = false;
+                        if (e instanceof Fish || e instanceof HungryFish || e instanceof Seaweed) {
+                            countable++;
+                        }
                     }
                 }
             }
@@ -132,6 +150,7 @@ public class FishTank {
             } catch (InterruptedException e) {
                 //not a big deal
             }
+            System.out.println("=============="+countable+"======================");
         }
 
     }
