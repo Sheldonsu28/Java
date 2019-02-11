@@ -88,7 +88,7 @@ public class FishTank {
         f.setLocation(10, 10);
         f.setVisible(true);
 
-        // Every .3 seconds, tell each item in the fishtank to take
+        // Every .3 seconds, tell each item in the fishTank to take
         // a turn.
         while (running) {
             FishTankEntity[][] newTank = new FishTankEntity[width][height];
@@ -113,9 +113,17 @@ public class FishTank {
                 }
             }
             entities = newTank;
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    FishTankEntity item = entities[x][y];
+                    if (item instanceof Seaweed) {
+                        ((Seaweed) item).eatCheck();
+                    }
+                }
+            }
 
 
-            // Tell the fishtank to redraw itself.
+            // Tell the fishTank to redraw itself.
             f.repaint();
 
             // Wait .3 seconds before redoing the queue.
