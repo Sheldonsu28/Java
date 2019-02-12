@@ -176,7 +176,7 @@ public class Fish extends FishTankEntity {
         // Figure out whether to move up or down, or neither.
 
 		d = Math.random();
-        if (d > 0.05) {
+        if (d < 0.05) {
             if (y < FishTank.getHeight() - 1){
                 if (FishTank.getEntity(x, y + 1) != null){
                     y += 0;
@@ -186,7 +186,7 @@ public class Fish extends FishTankEntity {
             }else{
                 y += 0;
             }
-        } else if (d >= 0.05 && d < 0.1) {
+        } if (d > 0.95) {
             if (y > 1){
                 if (FishTank.getEntity(x , y - 1) != null){
                     y -= 0;
