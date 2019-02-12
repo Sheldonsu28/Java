@@ -179,7 +179,7 @@ public class HungryFish extends FishTankEntity {
         // Figure out whether to move up or down, or neither.
         d = Math.random();
         // If it's less than 10%, move up or down.
-        if (d < 0.1) {
+        if (d < 0.05) {
             // Increment
             if (y < FishTank.getHeight() - 1){
                 if (FishTank.getEntity(x, y + 1) != null){
@@ -190,7 +190,7 @@ public class HungryFish extends FishTankEntity {
             }else{
                 y += 0;
             }
-        } else if (d > 0.89) {
+        } if (d > 0.95) {
             // Decrement
             if (y > 0){
                 if (FishTank.getEntity(x , y - 1) != null){
