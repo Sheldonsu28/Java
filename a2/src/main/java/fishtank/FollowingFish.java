@@ -34,7 +34,7 @@ public class FollowingFish extends FishTankEntity {
      * The entity that our fish is following
      */
     Fish de;
-
+    public boolean moved = false;
 
     /**
      * Constructs a new hungry fish.
@@ -71,7 +71,7 @@ public class FollowingFish extends FishTankEntity {
      * appearances.
      */
     private String reverseAppearance() {
-        System.out.println("Turnign around" + this.appearance);
+        System.out.println("Turning around" + this.appearance);
         String reverse = "";
         for (int i = appearance.length() - 1; i >= 0; i--) {
             switch (appearance.charAt(i)) {
@@ -167,71 +167,268 @@ public class FollowingFish extends FishTankEntity {
      */
     public void update() {
         turnToFace();
+
     }
 
-    public void followCheck() {
+    public void unboundMove() {
         if (Math.abs(de.getY() - y) > 2) {
-            if (de.getY() < y && y - 1 > 0) {
+            if (de.getY() < y && y - 1 >= 0) {
                 if (FishTank.getEntity(x, y - 1) == null) {
                     y -= 1;
                 } else {
-                    y -= 0;
+                    if (this.getX() != de.getX()) {
+                        if (goingRight) {
+                            if (x < FishTank.getWidth() - 1) {
+                                if (FishTank.getEntity(x + 1, y) != null) {
+                                    x += 0;
+                                } else {
+                                    x += 1;
+                                    this.moved = true;
+                                }
+                            } else {
+                                x += 0;
+                            }
+                        } else {
+                            if (x > 0) {
+                                if (FishTank.getEntity(x - 1, y) != null) {
+                                    x -= 0;
+                                } else {
+                                    x -= 1;
+                                    this.moved = true;
+                                }
+                            } else {
+                                x -= 0;
+                            }
+                        }
+                    }
                 }
-            } else {
-                System.out.println("nope");
             }
-            if (de.getY() > y && y + 1 < FishTank.getHeight() - 1) {
+            if (de.getY() > y && y + 1 <= FishTank.getHeight() - 1) {
                 if (FishTank.getEntity(x, y + 1) == null) {
                     y++;
                 } else {
-                    y += 0;
+                    if (this.getX() != de.getX()) {
+                        if (goingRight) {
+                            if (x < FishTank.getWidth() - 1) {
+                                if (FishTank.getEntity(x + 1, y) != null) {
+                                    x += 0;
+                                } else {
+                                    x += 1;
+                                    this.moved = true;
+                                }
+                            } else {
+                                x += 0;
+                            }
+                        } else {
+                            if (x > 0) {
+                                if (FishTank.getEntity(x - 1, y) != null) {
+                                    x -= 0;
+                                } else {
+                                    x -= 1;
+                                    this.moved = true;
+                                }
+                            } else {
+                                x -= 0;
+                            }
+                        }
+                    }
                 }
             }
         }
         if (Math.abs(de.getY() - y) < 2) {
-            if (de.getY() < y && y + 1 > 0) {
+            if (de.getY() < y && y + 1 <= FishTank.getHeight() - 1) {
                 if (FishTank.getEntity(x, y + 1) == null) {
                     y += 1;
                 } else {
-                    y += 0;
-                }
-            } else {
-                System.out.println("nope");
-            }
-            if (de.getY() > y && y - 1 < FishTank.getHeight() - 1) {
-                if (FishTank.getEntity(x, y - 1) == null) {
-                    y--;
-                } else {
-                    y -= 0;
-                }
-            }
-        }
-        // Move one spot to the right or left.
-        if (this.getX() != de.getX()) {
-            if (goingRight) {
-                if (x < FishTank.getWidth() - 1) {
-                    if (FishTank.getEntity(x + 1, y) != null) {
+                    if (FishTank.getEntity(x + 1, y) == null && x + 1 < FishTank.getWidth() - 1) {
+                        if (goingRight) {
+                            x += 1;
+                            this.moved = true;
+                        } else {
+                            goingRight = !goingRight;
+                            reverseAppearance();
+                            x += 1;
+                            this.moved = true;
+                        }
+                    } else if (FishTank.getEntity(x - 1, y) == null && x - 1 > 0) {
+                        if (!goingRight) {
+                            x -= 1;
+                            this.moved = true;
+                        } else {
+                            goingRight = !goingRight;
+                            reverseAppearance();
+                            x -= 1;
+                            this.moved = true;
+                        }
+                    } else {
                         x += 0;
-                    } else {
-                        x += 1;
                     }
-                } else {
-                    x += 0;
-                }
-            } else {
-                if (x > 0) {
-                    if (FishTank.getEntity(x - 1, y) != null) {
-                        x -= 0;
-                    } else {
-                        x -= 1;
-                    }
-                } else {
-                    x -= 0;
                 }
             }
-            System.out.println(this.getX() - de.getX());
+
+
+            if (de.getY() > y && y - 1 >= 0) {
+                if (FishTank.getEntity(x, y - 1) == null) {
+                    y -= 1;
+                } else {
+                    if (FishTank.getEntity(x + 1, y) == null && x + 1 < FishTank.getWidth() - 1) {
+                        if (goingRight) {
+                            x += 1;
+                            this.moved = true;
+                        } else {
+                            goingRight = !goingRight;
+                            reverseAppearance();
+                            x += 1;
+                            this.moved = true;
+                        }
+                    } else if (FishTank.getEntity(x - 1, y) == null && x - 1 > 0) {
+                        if (!goingRight) {
+                            x -= 1;
+                            this.moved = true;
+                        } else {
+                            goingRight = !goingRight;
+                            reverseAppearance();
+                            x -= 1;
+                            this.moved = true;
+                        }
+                    } else {
+                        x += 0;
+                    }
+                }
+            }
+
         }
     }
 
+    public void moveOnBound() {
+        if (Math.abs(de.getY() - this.getY()) < 2) {
+            if (de.getY() < this.getY()) {
+                if (FishTank.getEntity(x, y - 1) == null) {
+                    y -= 1;
+                } else {
+                    if (goingRight) {
+                        if (x < FishTank.getWidth() - 1) {
+                            if (FishTank.getEntity(x + 1, y) != null) {
+                                x += 0;
+                            } else {
+                                x += 1;
+                                this.moved = true;
+                            }
+                        } else {
+                            x += 0;
+                        }
+                    } else {
+                        if (x > 0) {
+                            if (FishTank.getEntity(x - 1, y) != null) {
+                                x -= 0;
+                            } else {
+                                x -= 1;
+                                this.moved = true;
+                            }
+                        } else {
+                            x -= 0;
+                        }
+                    }
+                }
+            }
+            if (de.getY() > this.getY()) {
+                if (FishTank.getEntity(x, y + 1) == null) {
+                    y += 1;
+                } else {
+                    if (goingRight) {
+                        if (x < FishTank.getWidth() - 1) {
+                            if (FishTank.getEntity(x + 1, y) != null) {
+                                x += 0;
+                            } else {
+                                x += 1;
+                                this.moved = true;
+                            }
+                        } else {
+                            x += 0;
+                        }
+                    } else {
+                        if (x > 0) {
+                            if (FishTank.getEntity(x - 1, y) != null) {
+                                x -= 0;
+                            } else {
+                                x -= 1;
+                                this.moved = true;
+                            }
+                        } else {
+                            x -= 0;
+                        }
+                    }
+                }
+            }
+        }
+        if (Math.abs(de.getY() - this.getY()) > 2) {
+            if (FishTank.getEntity(x + 1, y) == null && x + 1 < FishTank.getWidth() - 1) {
+                if (goingRight) {
+                    x += 1;
+                    this.moved = true;
+                } else {
+                    goingRight = !goingRight;
+                    reverseAppearance();
+                    x += 1;
+                    this.moved = true;
+                }
+            } else if (FishTank.getEntity(x - 1, y) == null && x - 1 > 0) {
+                if (!goingRight) {
+                    x -= 1;
+                    this.moved = true;
+                } else {
+                    goingRight = !goingRight;
+                    reverseAppearance();
+                    x -= 1;
+                    this.moved = true;
+                }
+            } else {
+                x += 0;
+            }
 
+        }
+    }
+
+    public void moveX() {
+        if (!this.moved) {
+            // Move one spot to the right or left.
+            if (this.getX() != de.getX()) {
+                if (goingRight) {
+                    if (x < FishTank.getWidth() - 1) {
+                        if (FishTank.getEntity(x + 1, y) != null) {
+                            x += 0;
+                        } else {
+                            x += 1;
+                        }
+                    } else {
+                        x += 0;
+                    }
+                } else {
+                    if (x > 0) {
+                        if (FishTank.getEntity(x - 1, y) == null) {
+                            x -= 1;
+                        } else {
+                            if (this.getY() < de.getY()) {
+                                if (this.y - 1 <= 0 && FishTank.getEntity(x, y - 1) == null) {
+                                    y -= 1;
+                                } else {
+                                    y -= 0;
+                                }
+                            } else {
+                                if (this.y + 1 <= FishTank.getHeight() - 1 && FishTank.getEntity(x, y + 1) == null) {
+                                    y += 1;
+                                } else {
+                                    y += 0;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+    }
 }
