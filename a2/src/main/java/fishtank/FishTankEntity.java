@@ -3,7 +3,7 @@ package fishtank;
 /**
  * In Java, an "abstract class" is just a class that doesn't implement
  * some of its methods.
- *
+ * <p>
  * In CSC148, you've seen things like this before, where every method in a class
  * simply raised a NotImplementedError. Those are also called abstract classes,
  * and fulfill a similar purpose (try replacing a usage of FishTankEntity with
@@ -14,6 +14,7 @@ public abstract class FishTankEntity {
     private boolean exists = true;
 
     abstract void update();
+
     abstract void setLocation(int x, int y);
 
     void delete() {
@@ -25,5 +26,6 @@ public abstract class FishTankEntity {
     }
 
     abstract int getX();
+
     abstract int getY();
 }
