@@ -167,7 +167,13 @@ public class FollowingFish extends FishTankEntity {
      */
     public void update() {
         turnToFace();
-
+        if (y == 0 || y == FishTank.getHeight() - 1){
+            this.moveOnBound();
+        }else{
+            this.unboundMove();
+        }
+        this.moveX();
+        this.moved = false;
     }
 
     public void unboundMove() {
