@@ -1,4 +1,5 @@
 package fishtank;
+
 import java.awt.*;
 
 /**
@@ -6,21 +7,33 @@ import java.awt.*;
  */
 public class Bubble extends FishTankEntity {
 
-    /** How this bubble appears on the screen. */
+    /**
+     * How this bubble appears on the screen.
+     */
     private String appearance;
 
-    /** The font used to draw instances of this class. */
+    /**
+     * The font used to draw instances of this class.
+     */
     static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
-    /** My colour. Ah, the vagaries of British vs. US spelling. */
+    /**
+     * My colour. Ah, the vagaries of British vs. US spelling.
+     */
     Color colour;
 
-    /** Use for random movement left and right.  */
+    /**
+     * Use for random movement left and right.
+     */
     public double d;
 
-    /** This bubble's first coordinate. */
+    /**
+     * This bubble's first coordinate.
+     */
     int x;
-    /** This bubble's second coordinate. */
+    /**
+     * This bubble's second coordinate.
+     */
     protected int y;
 
     /**
@@ -28,21 +41,22 @@ public class Bubble extends FishTankEntity {
      */
     public Bubble() {
         // Get a nice-looking grey for the bubble
-         colour = Color.gray.darker().darker().darker();
-         // start off with . as the appearance
+        colour = Color.gray.darker().darker().darker();
+        // start off with . as the appearance
         appearance = ".";
     }
 
     /**
      * Set this item's location.
+     *
      * @param a the first coordinate.
-     * @param b  the second coordinate.
+     * @param b the second coordinate.
      */
     public void setLocation(int a, int b) {
         // set x to a
-      x = a;
+        x = a;
         // set y to b
-      y = b;
+        y = b;
     }
 
     @Override
@@ -59,28 +73,27 @@ public class Bubble extends FishTankEntity {
      * Draws the given string in the given graphics context at
      * at the given cursor location.
      *
-     * @param  g  the graphics context in which to draw the string.
-     * @param  s  the string to draw.
-     * @param  x  the x-coordinate of the string's cursor location.
-     * @param  y  the y-coordinate of the string's cursor location.
+     * @param g the graphics context in which to draw the string.
+     * @param s the string to draw.
+     * @param x the x-coordinate of the string's cursor location.
+     * @param y the y-coordinate of the string's cursor location.
      */
     void drawString(Graphics g, String s, int x, int y) {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y*fm.charWidth('W'), x*fm.getAscent());
+        g.drawString(s, y * fm.charWidth('W'), x * fm.getAscent());
     }
 
 
     /**
      * Draws this fish tank item.
      *
-     * @param  g  the graphics context in which to draw this item.
+     * @param g the graphics context in which to draw this item.
      */
     void draw(Graphics g) {
         drawString(g, appearance, y, x);
     }
-
 
 
     /**
@@ -100,94 +113,98 @@ public class Bubble extends FishTankEntity {
 
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Occasionally change a . to a o or a o to a O
+        // Occasionally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
-            if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
-            else if (appearance.equals("o"))appearance="O";
+            if (appearance.equals(".")) appearance = "o";
+                // If the appearance is an o, change it to a O
+            else if (appearance.equals("o")) appearance = "O";
         }
-    }    /**
+    }
+
+    /**
      * Causes this item to take its turn in the fish-tank simulation, moving up and left.
      */
     public void floatLeftUp() {
 
         // Move upwards.
-        if (y>0){
-            if (FishTank.getEntity(x, y - 1) != null){
+        if (y > 0) {
+            if (FishTank.getEntity(x, y - 1) != null) {
                 y -= 0;
-            }else{
-                y-=1;
+            } else {
+                y -= 1;
             }
-        }else{
-            y-= 0;
+        } else {
+            y -= 0;
         }
-        if (x > 0){
-            if (FishTank.getEntity(x - 1, y) != null){
+        if (x > 0) {
+            if (FishTank.getEntity(x - 1, y) != null) {
                 x -= 0;
-            }else{
-                x-=1;
+            } else {
+                x -= 1;
             }
-        }else{
+        } else {
             x -= 0;
         }
 
         // Figure out whether to grow, if at all.
-          d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        d = Math.random();
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals(".")) appearance = "o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o")) appearance = "O";
         }
     }
+
     /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void floatRightUp() {
 
         // Move upwards.
-        if (y > 0){
-            if (FishTank.getEntity(x, y - 1) != null){
+        if (y > 0) {
+            if (FishTank.getEntity(x, y - 1) != null) {
                 y -= 0;
-            }else{
-                y-=1;
+            } else {
+                y -= 1;
             }
-        }else{
-            y-=0;
+        } else {
+            y -= 0;
         }
-        if (x < FishTank.getWidth() - 1){
-            if (FishTank.getEntity(x+1, y) != null){
+        if (x < FishTank.getWidth() - 1) {
+            if (FishTank.getEntity(x + 1, y) != null) {
                 x += 0;
-            }else{
+            } else {
                 x += 1;
             }// right
-        }else{
+        } else {
             x += 0;
         }
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Occasionally change a . to a o or a o to a O
+        // Occasionally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
-            if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
-            else if (appearance.equals("o"))appearance="O";
+            if (appearance.equals(".")) appearance = "o";
+                // If the appearance is an o, change it to a O
+            else if (appearance.equals("o")) appearance = "O";
         }
     }
 
     public void update() {
-        if (y == 0){
+        if (y == 0) {
             this.delete();
-        }else{
+        } else {
             d = Math.random();
             if (d < 0.33) {
-                floatStraightUp();
+
+                floatLeftUp();
             } else if (d < 0.66) {
                 floatRightUp();
             } else /* heybub.d >= 0.66 */ {
-                floatLeftUp();
+                floatStraightUp();
             }
         }
     }
