@@ -49,7 +49,7 @@ public class FishTank {
 
     public static void addEntity(int x, int y, FishTankEntity e) {
         entities[x][y] = e;
-        e.setLocation(x , y);
+        e.setLocation(x, y);
     }
 
     public static FishTankEntity getEntity(int x, int y) {
@@ -118,14 +118,7 @@ public class FishTank {
                 }
             }
 
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    FishTankEntity item = entities[x][y];
-                    if (item instanceof Seaweed) {
-                        ((Seaweed) item).eatCheck();
-                    }
-                }
-            }
+
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     FishTankEntity e = entities[x][y];
@@ -134,6 +127,8 @@ public class FishTank {
                     }
                 }
             }
+
+
 
 
             // Tell the fishTank to redraw itself.
