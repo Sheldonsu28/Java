@@ -122,16 +122,6 @@ public class Seaweed extends FishTankEntity {
      */
     public void update() {
         leanRight = !leanRight;
-    }
-
-    public void eatCheck() {
-        for (int i = 0; i < this.l; i++) {
-            if (FishTank.getEntity(this.getX(), this.getY() - i) instanceof Fish || FishTank.getEntity(this.getX(), this.getY() - i) instanceof HungryFish) {
-                this.l = this.l - (this.l - i);
-                this.counter = 0;
-                break;
-            }
-        }
         if (this.l < this.oriLength) {
             if (this.counter == 200) {
                 this.l += 1;
@@ -139,6 +129,14 @@ public class Seaweed extends FishTankEntity {
             } else {
                 this.counter += 1;
             }
+        }
+    }
+
+    public void eatCheck(int y) {
+
+        if (this.getY() - y > 0 && this.getY() - y < this.l ) {
+                this.l =  this.getY() - y;
+                this.counter = 0;
         }
 
     }
