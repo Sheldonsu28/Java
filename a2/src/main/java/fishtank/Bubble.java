@@ -149,7 +149,7 @@ public class Bubble extends FishTankEntity {
 
         // Figure out whether to grow, if at all.
         d = Math.random();
-        // Oocasinally change a . to a o or a o to a O
+        // Occasionally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals(".")) appearance = "o";
