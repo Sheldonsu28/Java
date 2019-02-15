@@ -11,6 +11,9 @@ import static org.mockito.Mockito.mock;
 
 public class BubbleTest {
     private Bubble bubble;
+    private Bubble bubble1;
+    private Bubble bubble2;
+    private Bubble bubble3;
     private Seaweed seaweed1;
     private Seaweed seaweed2;
     private Seaweed seaweed3;
@@ -39,12 +42,15 @@ public class BubbleTest {
         hungryFish2 = mock(HungryFish.class);
         hungryFish3 = mock(HungryFish.class);
         bubble = new Bubble();
+        bubble1 = mock(Bubble.class);
+        bubble2 = mock(Bubble.class);
+        bubble3 = mock(Bubble.class);
 
 
 
     }
     @Test
-    public void collisionFish(){
+    public void collisionWithFish(){
         FishTank.addEntity(10,20,fish1);
         FishTank.addEntity(11,19,fish2);
         FishTank.addEntity(12,20,fish3);
@@ -56,7 +62,7 @@ public class BubbleTest {
         assertEquals (20, bubble.getY());
     }
     @Test
-    public void collisionSeaweed(){
+    public void collisionWithSeaweed(){
         FishTank.addEntity(10,20,seaweed1);
         FishTank.addEntity(11,19,seaweed2);
         FishTank.addEntity(12,20,seaweed3);
@@ -68,7 +74,7 @@ public class BubbleTest {
         assertEquals (20, bubble.getY());
     }
     @Test
-    public void collisionFollowingFish() {
+    public void collisionWithFollowingFish() {
         FishTank.addEntity(11, 20, followingFish1);
         FishTank.addEntity(12, 19, followingFish2);
         FishTank.addEntity(13, 20, followingFish3);
@@ -80,7 +86,7 @@ public class BubbleTest {
         assertEquals(20, bubble.getY());
     }
     @Test
-    public void collisionHungryFish() {
+    public void collisionWithHungryFish() {
         FishTank.addEntity(11, 20, hungryFish1);
         FishTank.addEntity(12, 19, hungryFish2);
         FishTank.addEntity(13, 20, hungryFish3);
@@ -89,6 +95,18 @@ public class BubbleTest {
             bubble.update();
         }
         assertEquals(12, bubble.getX());
+        assertEquals(20, bubble.getY());
+    }
+    @Test
+    public void collisionWithBubble(){
+        FishTank.addEntity(17, 20, bubble1);
+        FishTank.addEntity(18, 19, bubble2);
+        FishTank.addEntity(19, 20, bubble3);
+        FishTank.addEntity(18, 20, bubble);
+        for (int i = 0; i < 10; i++){
+            bubble.update();
+        }
+        assertEquals(18, bubble.getX());
         assertEquals(20, bubble.getY());
     }
 
@@ -101,12 +119,24 @@ public class BubbleTest {
         }
     }
     @Test
+    public void testLeftProbability(){
+        int counter = 0;
+        for (int i = 0; i < 1000;i++) {
+            FishTank.addEntity(32, 24, bubble);
+            bubble.update();
+            if (bubble.getX() < 32) {
+                counter++;
+            }
+        }
+        assertTrue(counter >= 280 && counter <= 380);
+    }
+    @Test
     public void testRightProbability(){
         int counter = 0;
         for (int i = 0; i < 1000;i++) {
-            FishTank.addEntity(10, 20, bubble);
+            FishTank.addEntity(32, 24, bubble);
             bubble.update();
-            if (bubble.getX() > 10) {
+            if (bubble.getX() > 32) {
                 counter++;
             }
 
@@ -114,15 +144,11 @@ public class BubbleTest {
         assertTrue(counter >= 280 && counter <= 380);
     }
     @Test
-    public void testLeftProbability(){
-        int counter = 0;
-        for (int i = 0; i < 1000;i++) {
-            FishTank.addEntity(10, 20, bubble);
+    public void alwaysGoUp(){
+        FishTank.addEntity(32,24, bubble);
+        for(int i = 0; i< 10 ;i++){
             bubble.update();
-            if (bubble.getX() < 10) {
-                counter++;
-            }
         }
-        assertTrue(counter >= 280 && counter <= 380);
+        assertEquals(10, 24- bubble.getY());
     }
 }
