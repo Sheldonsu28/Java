@@ -3,6 +3,7 @@ package fishtank;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class FishTest {
@@ -43,5 +44,34 @@ public class FishTest {
         //You could also write "assert bubbleMade", but using the JUnit version
         //makes the message much nicer if it fails.
         assertTrue(bubbleMade);
+    }
+    @Test
+    public void alwaysGoingRight(){
+        fish.setLocation(5,10);
+        for (int i = 0 ; i < 10; i++ ){
+            fish.setGoingRight(true);
+            fish.update();
+        }
+        assertEquals(15, fish.getX());
+    }
+    @Test
+    public void alwaysGoingLeft(){
+        fish.setLocation(20,10);
+        for (int i = 0 ; i < 10; i++ ){
+            fish.setGoingRight(false);
+            fish.update();
+        }
+        assertEquals(10, fish.getX());
+    }
+
+    @Test
+    public void collisionWithBorder(){
+        fish.setLocation(0,1);
+        for (int i = 0 ; i < 10; i++ ){
+            fish.setGoingRight(false);
+            fish.update();
+        }
+        assertEquals(0, fish.getX());
+
     }
 }
