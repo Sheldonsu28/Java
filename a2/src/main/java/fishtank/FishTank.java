@@ -2,7 +2,6 @@ package fishtank;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.Array;
 
 /**
  * A fish tank simulation.
@@ -99,38 +98,14 @@ public class FishTank {
                 for (int y = 0; y < height; y++) {
                     FishTankEntity e = entities[x][y];
                     if (e != null) {
-
-                        if (!e.processed) {
-                            entities[x][y].update();
-                            entities[x][y].processed = true;
-                            entities[x][y] = null;
-                            if (e.exists()) {
-                                try {                                      //remember to change this line.
-                                    entities[e.getX()][e.getY()] = e;
-                                } catch (ArrayIndexOutOfBoundsException a) {
-                                    System.out.println(e.getClass().getName());
-                                    System.out.println("X:" + e.getX() + " Y:" + e.getY());
-                                    running = false;
-                                }
-                            }
+                        entities[x][y].update();
+                        entities[x][y] = null;
+                        if (e.exists()) {
+                            entities[e.getX()][e.getY()] = e;
                         }
                     }
                 }
             }
-
-
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    FishTankEntity e = entities[x][y];
-                    if (e != null) {
-                        e.processed = false;
-                    }
-                }
-            }
-
-
-
-
             // Tell the fishTank to redraw itself.
             f.repaint();
 
