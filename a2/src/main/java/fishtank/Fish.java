@@ -10,7 +10,7 @@ public class Fish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    String appearance;
+    private String appearance;
 
     /**
      * Indicates whether this fish is moving right.
@@ -20,7 +20,7 @@ public class Fish extends FishTankEntity {
     /**
      * This fish's first coordinate.
      */
-    int x;
+    private int x;
     /**
      * This fish's second coordinate.
      */
@@ -28,7 +28,7 @@ public class Fish extends FishTankEntity {
     /**
      * The colour of this fish.
      */
-    Color colour;
+    private Color colour;
 
 
     /**
@@ -65,11 +65,13 @@ public class Fish extends FishTankEntity {
      * Causes this fish to blow a bubble.
      */
     protected void blowBubble() {
-        Bubble b = new Bubble();
-        b.setLocation(x, y);
-        System.out.println(x + " " + y);
+        if (FishTank.getEntity(x, y) == null) {
+            Bubble b = new Bubble();
+            b.setLocation(x, y);
+            System.out.println(x + " " + y);
 
-        FishTank.addEntity(x, y, b);
+            FishTank.addEntity(x, y, b);
+        }
     }
 
 
@@ -114,7 +116,6 @@ public class Fish extends FishTankEntity {
         return reverse;
     }
 
-
     /**
      * Turns this fish around, causing it to reverse direction.
      */
@@ -131,7 +132,7 @@ public class Fish extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
