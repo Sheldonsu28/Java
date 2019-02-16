@@ -10,7 +10,7 @@ public class HungryFish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    public String appearance;
+    private String appearance;
 
     /**
      * Indicates whether this fish is moving right.
@@ -20,11 +20,11 @@ public class HungryFish extends FishTankEntity {
     /**
      * This fish's first coordinate.
      */
-    int x;
+    private int x;
     /**
      * This fish's second coordinate.
      */
-    int y;
+    private int y;
     /**
      * The colour of this fish.
      */
@@ -236,9 +236,9 @@ public class HungryFish extends FishTankEntity {
                 y -= 0;
             }
         }
-        for (int i = 0;i < FishTank.getHeight(); i++){
-            FishTankEntity e = FishTank.getEntity(x,i);
-            if(e instanceof Seaweed){
+        for (int i = 0; i < FishTank.getHeight(); i++) {
+            FishTankEntity e = FishTank.getEntity(x, i);
+            if (e instanceof Seaweed) {
                 ((Seaweed) e).eatCheck(this.y);
             }
         }
