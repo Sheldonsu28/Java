@@ -170,12 +170,13 @@ public class HungryFish extends FishTankEntity {
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
-
+        boolean turnedAround = false;
         // Move one spot to the right or left.
         if (goingRight) {
             if (x < FishTank.getWidth() - 1) {
                 if (FishTank.getEntity(x + 1, y) != null) {
                     this.turnAround();
+                    turnedAround = true;
                 } else {
                     x += 1;
                 }
@@ -187,6 +188,7 @@ public class HungryFish extends FishTankEntity {
             if (x > 0) {
                 if (FishTank.getEntity(x - 1, y) != null) {
                     this.turnAround();
+                    turnedAround = true;
                 } else {
                     x -= 1;
                 }
@@ -205,7 +207,7 @@ public class HungryFish extends FishTankEntity {
         // Figure out whether I turn around.
         d = Math.random();
         // If it's less than 10%, turn around
-        if (d < 0.1) {
+        if (d < 0.1 && !turnedAround) {
             turnAround();
         }
 
