@@ -48,12 +48,12 @@ public class FishTest {
     }
     @Test
     public void alwaysGoingRight(){
-        fish.setLocation(5,10);
+        fish.setLocation(20,10);
         for (int i = 0 ; i < 10; i++ ){
             fish.setGoingRight(true);
             fish.update();
         }
-        assertEquals(15, fish.getX());
+        assertEquals(30, fish.getX());
     }
     @Test
     public void alwaysGoingLeft(){
@@ -115,13 +115,12 @@ public class FishTest {
     @Test
     public void turnAroundProbability(){
         int counter = 0;
-
+        fish.setLocation(32,24);
         for (int i = 0; i< 1000; i++){
-            fish.setLocation(10,20);
-            boolean before = fish.goingRight;
+            fish.goingRight = true;
             fish.update();
-            if (fish.goingRight != before ){
-                counter++;
+            if (!fish.goingRight){
+                counter += 1;
             }
         }
         System.out.println(counter);
