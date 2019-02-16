@@ -15,16 +15,16 @@ public class FollowingFish extends FishTankEntity {
     /**
      * Indicates whether this fish is moving right.
      */
-    boolean goingRight;
+    private boolean goingRight;
 
     /**
      * This fish's first coordinate.
      */
-    int x;
+    private int x;
     /**
      * This fish's second coordinate.
      */
-    int y;
+    private int y;
     /**
      * The colour of this fish.
      */
@@ -33,7 +33,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * The entity that our fish is following
      */
-    Fish de;
+    private Fish de;
     public boolean moved = false;
 
     /**
@@ -167,9 +167,9 @@ public class FollowingFish extends FishTankEntity {
      */
     public void update() {
         turnToFace();
-        if (y == 0 || y == FishTank.getHeight() - 1){
+        if (y == 0 || y == FishTank.getHeight() - 1) {
             this.moveOnBound();
-        }else{
+        } else {
             this.unboundMove();
         }
         this.moveX();
