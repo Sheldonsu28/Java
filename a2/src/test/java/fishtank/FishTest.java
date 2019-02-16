@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class FishTest {
@@ -73,5 +74,57 @@ public class FishTest {
         }
         assertEquals(0, fish.getX());
 
+    }
+
+    @Test
+    public void blowBubbleProbability(){
+        int counter = 0;
+
+        for (int i = 0; i < 1000; i++){
+            fish.setLocation(10,11);
+            fish.update();
+            for (int x = 0;x < FishTank.getWidth() -1 ; x++){
+                for (int y = 0; y < FishTank.getHeight() - 1; y++){
+                    FishTankEntity e = FishTank.getEntity(x,y);
+                    if (e instanceof Bubble){
+                        counter++;
+                        FishTank.addEntity( x,y, null);
+                    }
+                }
+            }
+
+        }
+        System.out.println(counter);
+        //assertTrue(counter > 50 && counter < 150);
+    }
+
+    @Test
+    public void moveVerticalProbability(){
+        int counter = 0;
+
+        for (int i = 0; i< 1000; i++){
+            fish.setLocation(10,20);
+            fish.update();
+            if (fish.getY() != 20 ){
+                counter++;
+            }
+        }
+        System.out.println(counter);
+        assertTrue(counter > 50 && counter < 150);
+    }
+    @Test
+    public void turnAroundProbability(){
+        int counter = 0;
+
+        for (int i = 0; i< 1000; i++){
+            fish.setLocation(10,20);
+            boolean before = fish.goingRight;
+            fish.update();
+            if (fish.goingRight != before ){
+                counter++;
+            }
+        }
+        System.out.println(counter);
+        assertTrue(counter > 50 && counter < 150);
     }
 }
