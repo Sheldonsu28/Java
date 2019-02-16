@@ -10,7 +10,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    public String appearance;
+    private String appearance;
 
     /**
      * Indicates whether this fish is moving right.
