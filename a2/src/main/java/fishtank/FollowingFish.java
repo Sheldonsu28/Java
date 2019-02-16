@@ -34,7 +34,7 @@ public class FollowingFish extends FishTankEntity {
      * The entity that our fish is following
      */
     private Fish de;
-    public boolean moved = false;
+    private boolean moved = false;
 
     /**
      * Constructs a new hungry fish.
@@ -132,7 +132,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
@@ -251,7 +251,7 @@ public class FollowingFish extends FishTankEntity {
                             x += 1;
                             this.moved = true;
                         } else {
-                            goingRight = !goingRight;
+                            goingRight = true;
                             reverseAppearance();
                             x += 1;
                             this.moved = true;
@@ -261,7 +261,7 @@ public class FollowingFish extends FishTankEntity {
                             x -= 1;
                             this.moved = true;
                         } else {
-                            goingRight = !goingRight;
+                            goingRight = false;
                             reverseAppearance();
                             x -= 1;
                             this.moved = true;
@@ -373,7 +373,7 @@ public class FollowingFish extends FishTankEntity {
                     x += 1;
                     this.moved = true;
                 } else {
-                    goingRight = !goingRight;
+                    goingRight = true;
                     reverseAppearance();
                     x += 1;
                     this.moved = true;
@@ -383,7 +383,7 @@ public class FollowingFish extends FishTankEntity {
                     x -= 1;
                     this.moved = true;
                 } else {
-                    goingRight = !goingRight;
+                    goingRight = false;
                     reverseAppearance();
                     x -= 1;
                     this.moved = true;
