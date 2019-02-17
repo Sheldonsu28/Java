@@ -15,7 +15,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * Indicates whether this fish is moving right.
      */
-    private boolean goingRight;
+    boolean goingRight;
 
     /**
      * This fish's first coordinate.
