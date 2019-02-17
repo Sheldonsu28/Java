@@ -184,8 +184,8 @@ public class FollowingFishTest {
     FishTank.addEntity(23,22,bubble1);
     FishTank.addEntity(22,23,bubble2);
     FishTank.addEntity(22,21,bubble3);
-    hungryFish.goingRight = true;
-    hungryFish.update();
+    follower.goingRight = true;
+    follower.update();
     assertTrue("Following fish moved!",follower.getX() == 22 && follower.getY() == 22);
   }
   @Test
