@@ -80,36 +80,10 @@ public class HungryFish extends FishTankEntity {
     private String reverseAppearance() {
         System.out.println("Turnign around" + this.appearance);
         String reverse = "";
-        for (int i = appearance.length() - 1; i >= 0; i--) {
-            switch (appearance.charAt(i)) {
-                case ')':
-                    reverse += '(';
-                    break;
-                case '(':
-                    reverse += ')';
-                    break;
-                case '>':
-                    reverse += '<';
-                    break;
-                case '<':
-                    reverse += '>';
-                    break;
-                case '}':
-                    reverse += '{';
-                    break;
-                case '{':
-                    reverse += '}';
-                    break;
-                case '[':
-                    reverse += ']';
-                    break;
-                case ']':
-                    reverse += '[';
-                    break;
-                default:
-                    reverse += appearance.charAt(i);
-                    break;
-            }
+        if (this.appearance.equals("><MEHUNGRY>")){
+            reverse = "<YRGNUHEM><";
+        }else if (this.appearance.equals("<YRGNUHEM><")){
+            reverse = "><MEHUNGRY>";
         }
         System.out.println("Turned around" + this.appearance);
         appearance = reverse;
@@ -136,7 +110,7 @@ public class HungryFish extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
