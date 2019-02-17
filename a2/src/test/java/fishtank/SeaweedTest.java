@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 public class SeaweedTest {
@@ -20,7 +21,7 @@ public class SeaweedTest {
     }
 
     @Test
-    public void growBack(){
+    public void testGrowBack(){
         FishTank.addEntity(22,32,seaweed);
         FishTank.addEntity(21, 30,fish);
         fish.setGoingRight(true);
@@ -34,20 +35,29 @@ public class SeaweedTest {
     }
 
     @Test
-    public void eatonTestFish(){
-        FishTank.addEntity(23,5,fish);
-        FishTank.addEntity(22,10,seaweed);
-        fish.goingRight = false;
-        fish.update();
-        assertEquals("The length of the seaweed should be 5 ",5 ,seaweed.l);
-    }
-    @Test
-    public void eatonTestHungryFish(){
-        FishTank.addEntity(23,5,hungryFish);
-        FishTank.addEntity(22,10,seaweed);
-        hungryFish.goingRight = false;
-        hungryFish.update();
-        assertEquals("The length of the seaweed should be 5 ",5 ,seaweed.l);
-    }
+    public void testBoundary(){
+        seaweed.setLocation(0,11);
+        for(int i = 0;i < 5; i++){
+            hungryFish.update();
+            assertTrue("Out of bound On left!", hungryFish.getX() >= 0);
+            assertTrue("Seaweed moved!", seaweed.getX() == 0 && seaweed.getY() == 11);
+        }
+        seaweed.setLocation(FishTank.width - 1,11);
+        for(int i = 0;i < 5; i++){
 
+            seaweed.update();
+            assertTrue("Out of bound On right!", hungryFish.getX() <= FishTank.width - 1);
+        }
+        for(int i = 0;i < 1000; i++){
+            seaweed.setLocation(11,0);
+            seaweed.update();
+            assertTrue("Out of bound On top!", hungryFish.getY() >= 0);
+        }
+        for(int i = 0;i < 1000; i++){
+            seaweed.setLocation(11,FishTank.height - 1);
+            seaweed.update();
+            assertTrue("Out of bound On bottom!", hungryFish.getY() <= FishTank.getHeight() - 1 );
+        }
+
+    }
 }
