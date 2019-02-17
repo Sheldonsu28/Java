@@ -151,4 +151,23 @@ public class BubbleTest {
         }
         assertEquals(10, 24- bubble.getY());
     }
+
+    @Test
+    public void testLeftBoundary(){
+        bubble.setLocation(0,FishTank.height - 1);
+        for (int i = 0 ; i < 64; i++){
+            bubble.update();
+            assertTrue("The bubble moved out of left boundary!", bubble.getX() >= 0);
+            assertTrue("The bubble moved out of top boundary!", bubble.getY() >= 0);
+        }
+    }
+    @Test
+    public void testRightBoundary(){
+        bubble.setLocation(FishTank.width - 1,FishTank.height - 1);
+        for (int i = 0 ; i < 64; i++){
+            bubble.update();
+            assertTrue("The bubble moved out of right boundary!", bubble.getX() <= FishTank.width - 1);
+            assertTrue("The bubble moved out of top boundary!", bubble.getY() >= 0);
+        }
+    }
 }
