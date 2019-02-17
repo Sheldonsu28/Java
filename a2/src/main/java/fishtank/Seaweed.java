@@ -9,7 +9,7 @@ public class Seaweed extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
@@ -20,12 +20,12 @@ public class Seaweed extends FishTankEntity {
     /**
      * Indicates whether the bottom segment is leaning right.
      */
-    boolean leanRight;
+    private boolean leanRight;
 
     /**
      * My colour. Ah,the vagaries of British vs. US spelling.
      */
-    Color colour;
+    private Color colour;
     private int oriLength;
     private int counter;
 
@@ -132,7 +132,7 @@ public class Seaweed extends FishTankEntity {
         }
     }
 
-    public void eatCheck(int y) {
+    void eatCheck(int y) {
 
         if (this.getY() - y > 0 && this.getY() - y < this.l ) {
                 this.l =  this.getY() - y;
