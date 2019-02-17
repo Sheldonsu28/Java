@@ -41,4 +41,96 @@ public class FollowingFishTest {
     assertEquals(2, vertDist);
     assertEquals(0, horizDist);
   }
+  @Test
+  public void testApproachesFromRight(){
+    follower.setLocation(10,10);
+    for (int i = 0;i < 5; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",0, x_dist);
+    assertEquals("Y coordinate does not match",2, y_dist);
+  }
+
+  @Test
+  public void testApproachesFromAbove(){
+    follower.setLocation(5,0);
+    for (int i = 0;i < 8; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",0, x_dist);
+    assertEquals("Y coordinate does not match",2, y_dist);
+  }
+
+  @Test
+  public void testApproachesFromLeft(){
+    follower.setLocation( 0 ,10);
+    for (int i = 0; i < 5; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",0, x_dist);
+    assertEquals("Y coordinate does not match",2, y_dist);
+  }
+
+  @Test
+  public void testOnUpperBorder(){
+    when(followee.getX()).thenReturn(10);
+    when(followee.getY()).thenReturn(1);
+    follower.setLocation(3,0);
+    for (int i = 0; i < 8; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",1, x_dist);
+    assertEquals("Y coordinate does not match",1, y_dist);
+
+  }
+  @Test
+  public void testOnLowerBorder(){
+    when(followee.getX()).thenReturn(10);
+    when(followee.getY()).thenReturn(FishTank.getHeight() - 2);
+    follower.setLocation(3,FishTank.getHeight() - 1);
+    for (int i = 0; i < 8; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",1, x_dist);
+    assertEquals("Y coordinate does not match",1, y_dist);
+
+  }
+
+  @Test
+  public void testCornerOnUpperBorder(){
+    when(followee.getX()).thenReturn(10);
+    when(followee.getY()).thenReturn(1);
+    follower.setLocation(10,0);
+    for (int i = 0; i < 2; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",1, x_dist);
+    assertEquals("Y coordinate does not match",1, y_dist);
+  }
+  @Test
+  public void testCornerOnLowerBorder(){
+    when(followee.getX()).thenReturn(10);
+    when(followee.getY()).thenReturn(FishTank.height - 2);
+    follower.setLocation(10,FishTank.height - 1);
+    for (int i = 0; i < 2; i++){
+      follower.update();
+    }
+    int x_dist = Math.abs(follower.getX() - followee.getX());
+    int y_dist = Math.abs(follower.getY() - followee.getY());
+    assertEquals("X coordinate does not match",1, x_dist);
+    assertEquals("Y coordinate does not match",1, y_dist);
+  }
+
 }
