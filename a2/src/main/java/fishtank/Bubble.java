@@ -203,7 +203,7 @@ public class Bubble extends FishTankEntity {
                 floatLeftUp();
             } else if (d < 0.66) {
                 floatRightUp();
-            } else /* heybub.d >= 0.66 */ {
+            } else {
                 floatStraightUp();
             }
         }
