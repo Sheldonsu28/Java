@@ -81,36 +81,10 @@ public class Fish extends FishTankEntity {
      */
     private String reverseAppearance() {
         String reverse = "";
-        for (int i = appearance.length() - 1; i >= 0; i--) {
-            switch (appearance.charAt(i)) {
-                case ')':
-                    reverse += '(';
-                    break;
-                case '(':
-                    reverse += ')';
-                    break;
-                case '>':
-                    reverse += '<';
-                    break;
-                case '<':
-                    reverse += '>';
-                    break;
-                case '}':
-                    reverse += '{';
-                    break;
-                case '{':
-                    reverse += '}';
-                    break;
-                case '[':
-                    reverse += ']';
-                    break;
-                case ']':
-                    reverse += '[';
-                    break;
-                default:
-                    reverse += appearance.charAt(i);
-                    break;
-            }
+        if (this.appearance.equals("><>")){
+            reverse = "<><";
+        }else if(this.appearance.equals("<><")){
+            reverse = "><>";
         }
 
         return reverse;
@@ -166,11 +140,13 @@ public class Fish extends FishTankEntity {
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
+        boolean turnedAround = false;
         // Move one spot to the right or left.
         if (goingRight) {
             if (x < FishTank.getWidth() - 1) {
                 if (FishTank.getEntity(x + 1, y) != null) {
                     this.turnAround();
+                    turnedAround = true;
                     x += 0;
                 } else {
                     x += 1;
@@ -182,6 +158,7 @@ public class Fish extends FishTankEntity {
             if (x > 0) {
                 if (FishTank.getEntity(x - 1, y) != null) {
                     this.turnAround();
+                    turnedAround = true;
                     x -= 0;
 
                 } else {
@@ -200,7 +177,7 @@ public class Fish extends FishTankEntity {
 
         // Figure out whether I turn around.
         d = Math.random();
-        if (d < 0.1) {
+        if (d < 0.1 && !turnedAround) {
             turnAround();
         }
 
@@ -229,7 +206,6 @@ public class Fish extends FishTankEntity {
                 y -= 0;
             }
         }
-
         for (int i = 0;i < FishTank.getHeight(); i++){
             FishTankEntity e = FishTank.getEntity(x,i);
             if(e instanceof Seaweed){
