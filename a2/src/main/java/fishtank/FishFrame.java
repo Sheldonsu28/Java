@@ -29,8 +29,8 @@ public class FishFrame extends JFrame {
         g.fillRect(0, 0, w, h);
 
         // Tell all the FishTank items to draw themselves.
-        for (int a = 0; a != (int) (480 / 10); a++) {
-            for (int b = 0; b != (int) (640 / 6); b++) {
+        for (int a = 0; a !=  (480 / 10); a++) {
+            for (int b = 0; b != (640 / 6); b++) {
                 if (FishTank.getEntity(b, a) != null)
                     if (FishTank.getEntity(b, a) instanceof Fish) {
                         ((Fish) FishTank.getEntity(b, a)).draw(g);
