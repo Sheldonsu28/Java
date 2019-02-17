@@ -15,17 +15,17 @@ public class Bubble extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
     /**
      * My colour. Ah, the vagaries of British vs. US spelling.
      */
-    Color colour;
+    private Color colour;
 
     /**
      * Use for random movement left and right.
      */
-    public double d;
+    private double d;
 
     /**
      * This bubble's first coordinate.
@@ -82,7 +82,7 @@ public class Bubble extends FishTankEntity {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y * fm.charWidth('W'), x * fm.getAscent());
+        g.drawString(s, x * fm.charWidth('W'), y * fm.getAscent());
     }
 
 
@@ -92,7 +92,7 @@ public class Bubble extends FishTankEntity {
      * @param g the graphics context in which to draw this item.
      */
     void draw(Graphics g) {
-        drawString(g, appearance, y, x);
+        drawString(g, appearance, x, y);
     }
 
 
