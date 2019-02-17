@@ -91,6 +91,11 @@ public class HungryFishTest {
     }
     @Test
     public void turnAroundProbability(){
+        for(int x = 0; x < FishTank.width - 1; x++){
+            for(int y  = 0; y < FishTank.height -1 ;y++){
+                FishTank.entities[x][y] = null;
+            }
+        }
         int counter = 0;
         hungryFish.setLocation(32,24);
         for (int i = 0; i< 1000; i++){
