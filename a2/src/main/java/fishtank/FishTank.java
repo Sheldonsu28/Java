@@ -30,18 +30,18 @@ public class FishTank {
     /**
      * The width (in entities) of the whole tank
      */
-    private static final int width = frameWidth / charWidth;
+    static final int width = frameWidth / charWidth;
 
     /**
      * The height (in entities) of the whole tank
      */
-    private static final int height = frameHeight / charHeight;
+    static final int height = frameHeight / charHeight;
 
 
     /**
      * (int)(640/6) columns, (int)(480/10) rows.
      */
-    private static FishTankEntity[][] entities =
+    static FishTankEntity[][] entities =
             new FishTankEntity[width][height];
 
     private static boolean running = true;
@@ -72,7 +72,6 @@ public class FishTank {
                 running = false;
             }
         });
-
         addEntity(23, 18, new Fish());
         addEntity(6, 12, new Fish());
         addEntity(17, 4, new Fish());
