@@ -121,14 +121,14 @@ public class BubbleTest {
     @Test
     public void testLeftProbability(){
         int counter = 0;
-        for (int i = 0; i < 1000;i++) {
-            FishTank.addEntity(32, 24, bubble);
-            bubble.update();
-            if (bubble.getX() < 32) {
-                counter++;
+            for (int i = 0; i < 1000; i++) {
+                FishTank.addEntity(32, 24, bubble);
+                bubble.update();
+                if (bubble.getX() < 32) {
+                    counter++;
+                }
             }
-        }
-        assertTrue(counter >= 280 && counter <= 380);
+            assertTrue("The counter number is " + counter,counter >= 280 && counter <= 380);
     }
     @Test
     public void testRightProbability(){
