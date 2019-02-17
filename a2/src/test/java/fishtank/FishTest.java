@@ -117,7 +117,7 @@ public class FishTest {
         int counter = 0;
         fish.setLocation(32,24);
         for (int i = 0; i< 1000; i++){
-            fish.goingRight = true;
+            fish.setGoingRight(true);
             fish.update();
             if (!fish.goingRight){
                 counter += 1;
